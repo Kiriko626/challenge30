@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS Reference VS Copy</title>
+</head>
+<body>
+
+<script>
+    // Начнем со строк, чисел и логических значений
+    let age = 100;
+    let age2 = age;
+    console.log(age, age2);
+    age = 200;
+    console.log(age, age2);
+
+    let name = 'Wes';
+    let name2 = name;
+    console.log(name, name2);
+    name = 'Wesley';
+    console.log(name, name2);
+
+
+    // У нас есть массив
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+
+    // И мы хотим скопировать его
+    const team = players;
+    console.log(players, team);
+
+    // Вы можете подумать, что мы можем сделать что-то вроде этого:
+    team[3] = 'Lux';
+
+    // Однако что происходит при обновлении массива?
+
+    // Так вот в чем проблема!
+
+    // О нет - мы также отредактировали исходный массив!
+
+    // Почему? Это потому что, это ссылка на массив, а не скопированный массив. Они оба указывают на один и тот же массив!
+
+    // Итак, как мы это исправим? Вместо этого мы берем копию!
+    const team2 = players.slice();
+
+    // У нас один путь
+
+    // Или создать новый массив и объединить в старый
+    const team3 = [].concat(players);
+
+    // Или использовать новый спред ES6
+    const team4 = [...players];
+    team4[3] = 'gaaaas';
+    console.log(team4);
+
+    const team5 = Array.from(players);
+    // Теперь, когда мы обновляем его, исходный массив не изменяется
+
+
+    // То же самое касается объектов, допустим, у нас есть объект person
+    // С объектами
+    const person = {
+        name: 'Wes Bos',
+        age: 80
+    };
+
+    // Сделаем копию:
+    // const capitan = person;
+    // capitan.number = 99;
+
+    // Как мы возьмем копию вместо этого?
+    const cap2 = Object.assign({}, person, {number: 99});
+    console.log(cap2);
+
+    // Надеемся, что скоро увидим объект ...spread
+    // const cap3 = {...person};
+
+</script>
+
+</body>
+</html>
